@@ -1,193 +1,208 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
-<style>
-    /* Reset & base */
-    * {margin:0;padding:0;box-sizing:border-box;}
-    body {font-family: 'Roboto', sans-serif; line-height:1.6; background-color:#f5f5f5; color:#333; transition:0.3s;}
-    a {text-decoration:none;color:inherit;}
-    img {max-width:100%; display:block;}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Charan Vijayakumar | Portfolio</title>
+  <style>
+    /* ----- GLOBAL STYLES ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
 
-    /* Navbar */
-    nav {position:fixed;top:0;width:100%;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,0.1);z-index:1000;}
-    nav ul {display:flex;justify-content:flex-end;padding:1rem 2rem;list-style:none;}
-    nav ul li {margin-left:2rem;}
-    nav ul li a {font-weight:700; color:#333; transition:0.3s;}
-    nav ul li a:hover {color:#007BFF;}
+    body {
+      font-family: "Poppins", Arial, sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #f5f5f5;
+      line-height: 1.6;
+    }
 
-    /* Sections */
-    section {padding:100px 50px; min-height:100vh;}
-    h1,h2,h3{margin-bottom:1rem;}
-    h1{font-family: 'Montserrat', sans-serif; font-size:3rem;}
-    h2{font-family: 'Montserrat', sans-serif; font-size:2rem; color:#007BFF;}
+    a {
+      color: #00bcd4;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
 
-    /* Landing */
-    #home {display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;}
-    #home p {font-size:1.2rem; margin-top:1rem;}
+    a:hover {
+      color: #ffb300;
+    }
 
-    /* About */
-    #about .timeline {position:relative; margin-top:2rem;}
-    #about .timeline::before {content:''; position:absolute; left:50%; top:0; bottom:0; width:4px; background:#007BFF; transform:translateX(-50%);}
-    .timeline-item {padding:1rem 2rem; position:relative; width:50%; background:#fff; margin:2rem 0; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);}
-    .timeline-item.left {left:0;}
-    .timeline-item.right {left:50%;}
-    .timeline-item::after {content:''; position:absolute; width:20px; height:20px; background:#007BFF; border-radius:50%; top:20px; right:-10px;}
-    .timeline-item.left::after {left:-10px; right:auto;}
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 40px 20px;
+    }
 
-    /* Skills */
-    .skills {display:flex; flex-wrap:wrap; gap:2rem; margin-top:2rem;}
-    .skill {flex:1 1 200px;}
-    .skill-name {margin-bottom:0.5rem;}
-    .skill-bar {width:100%; height:20px; background:#ddd; border-radius:10px; overflow:hidden;}
-    .skill-bar-fill {height:100%; background:#007BFF; width:0; transition:1s;}
+    /* ----- HEADER ----- */
+    header {
+      text-align: center;
+      padding: 60px 20px 40px;
+    }
 
-    /* Projects */
-    .projects {display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:2rem; margin-top:2rem;}
-    .project-card {background:#fff; padding:1rem; border-radius:8px; box-shadow:0 2px 10px rgba(0,0,0,0.1); transition:0.3s; cursor:pointer;}
-    .project-card:hover {transform:translateY(-5px);}
-    .project-card h3{color:#007BFF;}
+    header h1 {
+      font-size: 2.8em;
+      color: #00e5ff;
+    }
 
-    /* Contact */
-    form {display:flex; flex-direction:column; gap:1rem; max-width:500px; margin-top:2rem;}
-    input, textarea {padding:0.8rem; border-radius:5px; border:1px solid #ccc; width:100%; resize:none;}
-    button {padding:1rem; border:none; background:#007BFF; color:#fff; font-weight:700; border-radius:5px; cursor:pointer; transition:0.3s;}
-    button:hover {background:#0056b3;}
+    header h3 {
+      color: #ffb300;
+      margin-top: 10px;
+    }
 
-    /* Dark mode */
-    body.dark {background:#121212; color:#f5f5f5;}
-    body.dark nav {background:#1f1f1f;}
-    body.dark .timeline-item {background:#1f1f1f; color:#f5f5f5;}
-    body.dark .skill-bar {background:#333;}
-</style>
+    /* ----- SECTION BOXES ----- */
+    .card {
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 15px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    h2 {
+      color: #00e5ff;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #00bcd4;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+
+    ul {
+      margin-left: 20px;
+    }
+
+    /* ----- PROJECTS ----- */
+    .project {
+      margin-bottom: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 15px;
+      border-radius: 10px;
+      transition: background 0.3s ease;
+    }
+
+    .project:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .project h3 {
+      color: #ffb300;
+    }
+
+    /* ----- CONTACT ----- */
+    .contact a {
+      display: inline-block;
+      margin-right: 10px;
+      margin-top: 5px;
+      padding: 8px 12px;
+      background: #00bcd4;
+      color: #fff;
+      border-radius: 8px;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .contact a:hover {
+      background: #ffb300;
+      transform: translateY(-3px);
+    }
+
+    /* ----- FOOTER ----- */
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #bbb;
+      font-size: 0.9em;
+    }
+  </style>
 </head>
 <body>
-
-<!-- Navbar -->
-<nav>
-    <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li><a href="#" id="toggleDark">🌙</a></li>
-    </ul>
-</nav>
-
-<!-- Home -->
-<section id="home">
+  <header>
     <h1>Charan Vijayakumar</h1>
-    <p> Software Developer | Network Analyst |</p>
-    <a href="#projects"><button>View Projects</button></a>
-</section>
+    <h3>Software Engineer | Cybersecurity Enthusiast | Full-Stack Developer</h3>
+  </header>
 
-<!-- About -->
-<section id="about">
-    <h2>About Me</h2>
-    <p>I am a Software developer with expertise in legacy code enhancement, clang-tidy, and software optimization. Passionate about improving code quality and developing efficient solutions.</p>
-    <div class="timeline">
-        <div class="timeline-item left">
-            <h3>2023</h3>
-            <p>Developed Legacy Code Analyzer Tool for detecting C++ Core Guidelines violations.</p>
-        </div>
-        <div class="timeline-item right">
-            <h3>2022</h3>
-            <p>Worked on Snort IDS Test Environment setup for intrusion detection experiments.</p>
-        </div>
-        <div class="timeline-item left">
-            <h3>2021</h3>
-            <p>Built multiple C++ CLI utilities for automation and code analysis.</p>
-        </div>
+  <div class="container">
+    <!-- About Section -->
+    <div class="card">
+      <h2>About Me</h2>
+      <p>
+        I’m <strong>Charan Vijayakumar</strong>, a passionate <strong>Software Engineer</strong> and 
+        <strong>Master’s student in Cyber Security</strong> at the University of Limerick, Ireland.
+        I specialize in <strong>Java, Python, and full-stack web development</strong>, with experience in
+        <strong>Salesforce CRM, API integration, and Agile methodologies</strong>.
+      </p>
+      <p>
+        My work focuses on building <strong>secure and innovative software solutions</strong>. I’ve worked on 
+        projects like a <strong>Blockchain-based E-Voting System</strong> and a 
+        <strong>Realtime Online Try-On Application</strong> that showcase my problem-solving and creativity.
+      </p>
+      <p>
+        Outside coding, I love exploring new technologies, system security, and hands-on projects that push my technical limits.
+      </p>
     </div>
-</section>
 
-<!-- Skills -->
-<section id="skills">
-    <h2>Skills</h2>
-    <div class="skills">
-        <div class="skill">
-            <div class="skill-name">C++</div>
-            <div class="skill-bar"><div class="skill-bar-fill" data-width="90%"></div></div>
-        </div>
-        <div class="skill">
-            <div class="skill-name">Python</div>
-            <div class="skill-bar"><div class="skill-bar-fill" data-width="70%"></div></div>
-        </div>
-        <div class="skill">
-            <div class="skill-name">Linux & Bash</div>
-            <div class="skill-bar"><div class="skill-bar-fill" data-width="85%"></div></div>
-        </div>
-        <div class="skill">
-            <div class="skill-name">React JS</div>
-            <div class="skill-bar"><div class="skill-bar-fill" data-width="80%"></div></div>
-        </div>
+    <!-- Skills Section -->
+    <div class="card">
+      <h2>Technical Skills</h2>
+      <ul>
+        <li><strong>Languages:</strong> Java, Python</li>
+        <li><strong>Web Development:</strong> HTML5, CSS, JavaScript, Bootstrap, React.js, React Native, Django, Spring Boot, MySQL</li>
+        <li><strong>Salesforce:</strong> Configuration, Customization, CRM Solutions, Agile Methodology</li>
+        <li><strong>Tools:</strong> Android Studio, GitHub, Visual Studio Code</li>
+      </ul>
     </div>
-</section>
 
-<!-- Projects -->
-<section id="projects">
-    <h2>Projects</h2>
-    <div class="projects">
-        <div class="project-card">
-            <h3>Legacy Code Analyzer</h3>
-            <p>Automated detection of C++ Core Guidelines violations using clang-tidy.</p>
-            <a href="#" target="_blank">View on GitHub</a>
-        </div>
-        <div class="project-card">
-            <h3>Snort IDS Test Environment</h3>
-            <p>Custom intrusion detection scenarios setup for network security testing.</p>
-            <a href="#" target="_blank">View on GitHub</a>
-        </div>
-        <div class="project-card">
-            <h3>C++ CLI Utilities</h3>
-            <p>Batch file analyzers and automation scripts to improve productivity.</p>
-            <a href="#" target="_blank">View on GitHub</a>
-        </div>
+    <!-- Projects Section -->
+    <div class="card">
+      <h2>Projects</h2>
+
+      <div class="project">
+        <h3>E-Voting System using Blockchain</h3>
+        <p>
+          Developed a decentralized voting platform leveraging blockchain for secure, transparent, and 
+          tamper-proof elections. Built with Django and Blockchain frameworks.
+        </p>
+      </div>
+
+      <div class="project">
+        <h3>Trailing Realtime Online System (TROS)</h3>
+        <p>
+          Designed a virtual clothing try-on app enhancing user privacy and real-time visualization. 
+          Developed with React Native and Bootstrap.
+        </p>
+      </div>
+
+      <div class="project">
+        <h3>Basic Banking System</h3>
+        <p>
+          Built a mobile banking app using Android Studio and MySQL for safe fund transfers, 
+          balance tracking, and transaction history management.
+        </p>
+      </div>
     </div>
-</section>
 
-<!-- Contact -->
-<section id="contact">
-    <h2>Contact Me</h2>
-    <form onsubmit="alert('Form submitted!'); return false;">
-        <input type="text" placeholder="Your Name" required>
-        <input type="email" placeholder="Your Email" required>
-        <textarea rows="5" placeholder="Your Message" required></textarea>
-        <button type="submit">Send Message</button>
-    </form>
-</section>
+    <!-- Contact Section -->
+    <div class="card contact">
+      <h2>Contact</h2>
+      <p>Email: <a href="mailto:Vkcharan2001@gmail.com">Vkcharan2001@gmail.com</a></p>
+      <p>
+        <a href="https://linkedin.com/in/charan-vijayakumar-87a382199" target="_blank">LinkedIn</a>
+        <a href="https://github.com/Charan-GitHub" target="_blank">GitHub</a>
+      </p>
+      <p>📞 +353 894233636</p>
+    </div>
+  </div>
 
-<script>
-    // Smooth scroll
-    document.querySelectorAll('nav ul li a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e){
-            e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({behavior:'smooth'});
-        });
-    });
-
-    // Animate skill bars
-    window.addEventListener('scroll', () => {
-        document.querySelectorAll('.skill-bar-fill').forEach(bar => {
-            const top = bar.getBoundingClientRect().top;
-            if(top < window.innerHeight){
-                bar.style.width = bar.getAttribute('data-width');
-            }
-        });
-    });
-
-    // Dark/Light mode toggle
-    const toggle = document.getElementById('toggleDark');
-    toggle.addEventListener('click', () => {
-        document.body.classList.toggle('dark');
-    });
-</script>
-
+  <footer>
+    <p>© 2025 Charan Vijayakumar | Designed with ❤️ using HTML & CSS</p>
+  </footer>
 </body>
 </html>
 
