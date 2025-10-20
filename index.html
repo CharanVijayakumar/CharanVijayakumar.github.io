@@ -1,115 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Charan Vijayakumar | Portfolio</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background-color: #f5f7fa;
-            margin: 40px;
-            color: #333;
-            line-height: 1.6;
-        }
-        h1, h2 {
-            color: #007acc;
-        }
-        .container {
-            max-width: 900px;
-            margin: auto;
-        }
-        .about {
-            background: #fff;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-        }
-        .project {
-            margin-bottom: 20px;
-        }
-        a {
-            color: #007acc;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Charan Vijayakumar | Portfolio</title>
+  <style>
+    /* ----- GLOBAL STYLES ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Poppins", Arial, sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #f5f5f5;
+      line-height: 1.6;
+    }
+
+    a {
+      color: #00bcd4;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: #ffb300;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    /* ----- HEADER ----- */
+    header {
+      text-align: center;
+      padding: 60px 20px 40px;
+    }
+
+    header h1 {
+      font-size: 2.8em;
+      color: #00e5ff;
+    }
+
+    header h3 {
+      color: #ffb300;
+      margin-top: 10px;
+    }
+
+    /* ----- SECTION BOXES ----- */
+    .card {
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 15px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    h2 {
+      color: #00e5ff;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #00bcd4;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+
+    ul {
+      margin-left: 20px;
+    }
+
+    /* ----- PROJECTS ----- */
+    .project {
+      margin-bottom: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 15px;
+      border-radius: 10px;
+      transition: background 0.3s ease;
+    }
+
+    .project:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .project h3 {
+      color: #ffb300;
+    }
+
+    /* ----- CONTACT ----- */
+    .contact a {
+      display: inline-block;
+      margin-right: 10px;
+      margin-top: 5px;
+      padding: 8px 12px;
+      background: #00bcd4;
+      color: #fff;
+      border-radius: 8px;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .contact a:hover {
+      background: #ffb300;
+      transform: translateY(-3px);
+    }
+
+    /* ----- FOOTER ----- */
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #bbb;
+      font-size: 0.9em;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Charan Vijayakumar</h1>
-        <h3>Software Engineer | Cybersecurity Enthusiast | Full-Stack Developer</h3>
+  <header>
+    <h1>Charan Vijayakumar</h1>
+    <h3>Software Engineer | Cybersecurity Enthusiast | Full-Stack Developer</h3>
+  </header>
 
-        <div class="about">
-            <h2>About Me</h2>
-            <p>
-                I’m <strong>Charan Vijayakumar</strong>, a passionate <strong>Software Engineer</strong> and 
-                <strong>Master’s student in Cyber Security</strong> at the University of Limerick, Ireland. 
-                I have a strong foundation in <strong>Java, Python, and full-stack web development</strong>, with practical 
-                experience in <strong>Salesforce CRM, API integration, and Agile methodologies</strong>.
-            </p>
-
-            <p>
-                My work reflects a deep interest in developing secure, efficient, and user-focused solutions. 
-                I’ve worked on several projects including a <strong>Blockchain-based E-Voting System</strong> 
-                and a <strong>Realtime Online Try-On System</strong>, showcasing my ability to blend innovation with functionality. 
-                I aim to leverage my skills in programming and cybersecurity to contribute to impactful, scalable software systems.
-            </p>
-
-            <p>
-                When I’m not coding, I enjoy exploring new technologies, learning about system security, and working on 
-                projects that challenge my problem-solving mindset.
-            </p>
-        </div>
-
-        <div class="about">
-            <h2>Technical Skills</h2>
-            <ul>
-                <li><strong>Languages:</strong> Java, Python</li>
-                <li><strong>Web Development:</strong> HTML5, CSS, JavaScript, Bootstrap, React.js, React Native, Django, Spring Boot, MySQL</li>
-                <li><strong>Salesforce:</strong> Configuration, Customization, CRM Solutions, Agile Methodology</li>
-                <li><strong>Tools:</strong> Android Studio, GitHub, Visual Studio Code</li>
-            </ul>
-        </div>
-
-        <div class="about">
-            <h2>Projects</h2>
-
-            <div class="project">
-                <h3>E-Voting System using Blockchain</h3>
-                <p>
-                    Developed a decentralized voting system leveraging blockchain technology to ensure security, transparency, 
-                    and reliability in the electoral process. Built with Django and Blockchain frameworks.
-                </p>
-            </div>
-
-            <div class="project">
-                <h3>Trailing Realtime Online System (TROS)</h3>
-                <p>
-                    Created a virtual clothing try-on application that enhances user privacy and provides real-time visualization, 
-                    developed using React Native and Bootstrap.
-                </p>
-            </div>
-
-            <div class="project">
-                <h3>Basic Banking System</h3>
-                <p>
-                    Designed a mobile application in Android Studio with a MySQL database for secure fund transfers, 
-                    balance checks, and transaction history tracking.
-                </p>
-            </div>
-        </div>
-
-        <div class="about">
-            <h2>Contact</h2>
-            <p>Email: <a href="mailto:Vkcharan2001@gmail.com">Vkcharan2001@gmail.com</a></p>
-            <p>LinkedIn: <a href="https://linkedin.com/in/charan-vijayakumar-87a382199" target="_blank">linkedin.com/in/charan-vijayakumar-87a382199</a></p>
-            <p>GitHub: <a href="https://github.com/Charan-GitHub" target="_blank">github.com/Charan-GitHub</a></p>
-            <p>Phone: +353 894233636</p>
-        </div>
+  <div class="container">
+    <!-- About Section -->
+    <div class="card">
+      <h2>About Me</h2>
+      <p>
+        I’m <strong>Charan Vijayakumar</strong>, a passionate <strong>Software Engineer</strong> and 
+        <strong>Master’s student in Cyber Security</strong> at the University of Limerick, Ireland.
+        I specialize in <strong>Java, Python, and full-stack web development</strong>, with experience in
+        <strong>Salesforce CRM, API integration, and Agile methodologies</strong>.
+      </p>
+      <p>
+        My work focuses on building <strong>secure and innovative software solutions</strong>. I’ve worked on 
+        projects like a <strong>Blockchain-based E-Voting System</strong> and a 
+        <strong>Realtime Online Try-On Application</strong> that showcase my problem-solving and creativity.
+      </p>
+      <p>
+        Outside coding, I love exploring new technologies, system security, and hands-on projects that push my technical limits.
+      </p>
     </div>
+
+    <!-- Skills Section -->
+    <div class="card">
+      <h2>Technical Skills</h2>
+      <ul>
+        <li><strong>Languages:</strong> Java, Python</li>
+        <li><strong>Web Development:</strong> HTML5, CSS, JavaScript, Bootstrap, React.js, React Native, Django, Spring Boot, MySQL</li>
+        <li><strong>Salesforce:</strong> Configuration, Customization, CRM Solutions, Agile Methodology</li>
+        <li><strong>Tools:</strong> Android Studio, GitHub, Visual Studio Code</li>
+      </ul>
+    </div>
+
+    <!-- Projects Section -->
+    <div class="card">
+      <h2>Projects</h2>
+
+      <div class="project">
+        <h3>E-Voting System using Blockchain</h3>
+        <p>
+          Developed a decentralized voting platform leveraging blockchain for secure, transparent, and 
+          tamper-proof elections. Built with Django and Blockchain frameworks.
+        </p>
+      </div>
+
+      <div class="project">
+        <h3>Trailing Realtime Online System (TROS)</h3>
+        <p>
+          Designed a virtual clothing try-on app enhancing user privacy and real-time visualization. 
+          Developed with React Native and Bootstrap.
+        </p>
+      </div>
+
+      <div class="project">
+        <h3>Basic Banking System</h3>
+        <p>
+          Built a mobile banking app using Android Studio and MySQL for safe fund transfers, 
+          balance tracking, and transaction history management.
+        </p>
+      </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="card contact">
+      <h2>Contact</h2>
+      <p>Email: <a href="mailto:Vkcharan2001@gmail.com">Vkcharan2001@gmail.com</a></p>
+      <p>
+        <a href="https://linkedin.com/in/charan-vijayakumar-87a382199" target="_blank">LinkedIn</a>
+        <a href="https://github.com/Charan-GitHub" target="_blank">GitHub</a>
+      </p>
+      <p>📞 +353 894233636</p>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2025 Charan Vijayakumar | Designed with ❤️ using HTML & CSS</p>
+  </footer>
 </body>
 </html>
+
