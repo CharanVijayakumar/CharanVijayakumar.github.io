@@ -2,207 +2,225 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Charan Vijayakumar | Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Charan Vijayakumar Portfolio</title>
   <style>
-    /* ----- GLOBAL STYLES ----- */
+    /* Reset & base */
     * {
-      margin: 0;
-      padding: 0;
       box-sizing: border-box;
+      margin: 0; padding: 0;
       scroll-behavior: smooth;
     }
-
     body {
-      font-family: "Poppins", Arial, sans-serif;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      color: #f5f5f5;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0a192f;
+      color: #ccd6f6;
       line-height: 1.6;
     }
-
     a {
-      color: #00bcd4;
+      color: #64ffda;
       text-decoration: none;
-      transition: color 0.3s ease;
     }
-
     a:hover {
-      color: #ffb300;
+      text-decoration: underline;
     }
-
+    /* Container */
     .container {
       max-width: 1000px;
       margin: auto;
-      padding: 40px 20px;
+      padding: 2rem 1rem;
     }
-
-    /* ----- HEADER ----- */
-    header {
-      text-align: center;
-      padding: 60px 20px 40px;
+    /* Navbar */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      position: fixed;
+      width: 100%;
+      background: #0a192f;
+      top: 0; left: 0;
+      z-index: 10;
+      border-bottom: 1px solid #112240;
     }
-
-    header h1 {
-      font-size: 2.8em;
-      color: #00e5ff;
+    nav .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #64ffda;
     }
-
-    header h3 {
-      color: #ffb300;
-      margin-top: 10px;
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
     }
-
-    /* ----- SECTION BOXES ----- */
-    .card {
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 15px;
-      padding: 30px;
-      margin-bottom: 30px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-      transition: transform 0.3s ease, background 0.3s ease;
+    nav ul li {
+      padding: 0.5rem 1rem;
     }
-
-    .card:hover {
-      transform: translateY(-5px);
-      background: rgba(255, 255, 255, 0.12);
+    nav ul li a {
+      font-weight: 600;
     }
-
-    h2 {
-      color: #00e5ff;
-      margin-bottom: 15px;
-      border-bottom: 2px solid #00bcd4;
+    nav ul li a.active {
+      border-bottom: 2px solid #64ffda;
+    }
+    /* Hero Section */
+    #hero {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 90vh;
+      text-align: left;
+      padding-left: 2rem;
+    }
+    #hero h1 {
+      font-size: 3rem;
+      color: #64ffda;
+      margin-bottom: 0.5rem;
+    }
+    #hero p {
+      font-size: 1.3rem;
+      max-width: 600px;
+      color: #8892b0;
+    }
+    /* Sections */
+    section {
+      padding: 4rem 0;
+      border-bottom: 1px solid #112240;
+    }
+    section h2 {
+      font-size: 2rem;
+      color: #ccd6f6;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid #64ffda;
       display: inline-block;
-      padding-bottom: 5px;
+      padding-bottom: 0.3rem;
     }
-
-    ul {
-      margin-left: 20px;
+    /* About */
+    #about p {
+      max-width: 700px;
+      color: #8892b0;
+      font-size: 1.1rem;
     }
-
-    /* ----- PROJECTS ----- */
+    /* Skills */
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 1rem;
+    }
+    .skills-list span {
+      background: #112240;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      color: #64ffda;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    /* Projects */
     .project {
-      margin-bottom: 20px;
-      background: rgba(255, 255, 255, 0.05);
-      padding: 15px;
-      border-radius: 10px;
-      transition: background 0.3s ease;
+      background: #112240;
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      border-radius: 5px;
+      box-shadow: 0 0 5px #64ffda55;
+      transition: transform 0.3s ease;
     }
-
     .project:hover {
-      background: rgba(255, 255, 255, 0.15);
+      transform: translateY(-5px);
     }
-
     .project h3 {
-      color: #ffb300;
+      color: #64ffda;
+      margin-bottom: 0.5rem;
     }
-
-    /* ----- CONTACT ----- */
-    .contact a {
-      display: inline-block;
-      margin-right: 10px;
-      margin-top: 5px;
-      padding: 8px 12px;
-      background: #00bcd4;
-      color: #fff;
-      border-radius: 8px;
-      transition: background 0.3s ease, transform 0.3s ease;
+    .project p {
+      color: #8892b0;
+      font-size: 1rem;
+      line-height: 1.3;
     }
-
-    .contact a:hover {
-      background: #ffb300;
-      transform: translateY(-3px);
+    /* Contact */
+    #contact p {
+      max-width: 700px;
+      font-size: 1.1rem;
+      color: #8892b0;
     }
-
-    /* ----- FOOTER ----- */
-    footer {
-      text-align: center;
-      padding: 20px;
-      color: #bbb;
-      font-size: 0.9em;
+    /* Responsive */
+    @media (max-width: 600px) {
+      #hero h1 {
+        font-size: 2.2rem;
+      }
+      nav ul {
+        display: none; /* Simplify - no menu on small */
+      }
+      #hero {
+        padding-left: 1rem;
+      }
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Charan Vijayakumar</h1>
-    <h3>Software Engineer | Cybersecurity Enthusiast | Full-Stack Developer</h3>
-  </header>
 
-  <div class="container">
-    <!-- About Section -->
-    <div class="card">
-      <h2>About Me</h2>
-      <p>
-        I’m <strong>Charan Vijayakumar</strong>, a passionate <strong>Software Engineer</strong> and 
-        <strong>Master’s student in Cyber Security</strong> at the University of Limerick, Ireland.
-        I specialize in <strong>Java, Python, and full-stack web development</strong>, with experience in
-        <strong>Salesforce CRM, API integration, and Agile methodologies</strong>.
-      </p>
-      <p>
-        My work focuses on building <strong>secure and innovative software solutions</strong>. I’ve worked on 
-        projects like a <strong>Blockchain-based E-Voting System</strong> and a 
-        <strong>Realtime Online Try-On Application</strong> that showcase my problem-solving and creativity.
-      </p>
-      <p>
-        Outside coding, I love exploring new technologies, system security, and hands-on projects that push my technical limits.
-      </p>
-    </div>
+<nav>
+  <div class="logo">Charan Vijayakumar</div>
+  <ul>
+    <li><a href="#hero" class="active">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
 
-    <!-- Skills Section -->
-    <div class="card">
-      <h2>Technical Skills</h2>
-      <ul>
-        <li><strong>Languages:</strong> Java, Python</li>
-        <li><strong>Web Development:</strong> HTML5, CSS, JavaScript, Bootstrap, React.js, React Native, Django, Spring Boot, MySQL</li>
-        <li><strong>Salesforce:</strong> Configuration, Customization, CRM Solutions, Agile Methodology</li>
-        <li><strong>Tools:</strong> Android Studio, GitHub, Visual Studio Code</li>
-      </ul>
-    </div>
+<div id="hero" class="container">
+  <h1>Charan Vijayakumar</h1>
+  <p>Software Developer | Cybersecurity Enthusiast | Agile Practitioner</p>
+  <p><a href="resume.pdf" target="_blank" style="color:#64ffda;font-weight:700;">Download Resume</a></p>
+</div>
 
-    <!-- Projects Section -->
-    <div class="card">
-      <h2>Projects</h2>
+<section id="about" class="container">
+  <h2>About Me</h2>
+  <p>I am a motivated software development enthusiast with expertise in Agile methodology, Java, Apex, and API programming. Currently pursuing a Master's degree in Cybersecurity, I combine strong academic knowledge with hands-on project experience.</p>
+</section>
 
-      <div class="project">
-        <h3>E-Voting System using Blockchain</h3>
-        <p>
-          Developed a decentralized voting platform leveraging blockchain for secure, transparent, and 
-          tamper-proof elections. Built with Django and Blockchain frameworks.
-        </p>
-      </div>
-
-      <div class="project">
-        <h3>Trailing Realtime Online System (TROS)</h3>
-        <p>
-          Designed a virtual clothing try-on app enhancing user privacy and real-time visualization. 
-          Developed with React Native and Bootstrap.
-        </p>
-      </div>
-
-      <div class="project">
-        <h3>Basic Banking System</h3>
-        <p>
-          Built a mobile banking app using Android Studio and MySQL for safe fund transfers, 
-          balance tracking, and transaction history management.
-        </p>
-      </div>
-    </div>
-
-    <!-- Contact Section -->
-    <div class="card contact">
-      <h2>Contact</h2>
-      <p>Email: <a href="mailto:Vkcharan2001@gmail.com">Vkcharan2001@gmail.com</a></p>
-      <p>
-        <a href="https://linkedin.com/in/charan-vijayakumar-87a382199" target="_blank">LinkedIn</a>
-        <a href="https://github.com/Charan-GitHub" target="_blank">GitHub</a>
-      </p>
-      <p>📞 +353 894233636</p>
-    </div>
+<section id="skills" class="container">
+  <h2>Skills</h2>
+  <div class="skills-list">
+    <span>Java</span>
+    <span>Python</span>
+    <span>React.js</span>
+    <span>Django</span>
+    <span>HTML/CSS</span>
+    <span>Salesforce</span>
+    <span>Agile</span>
   </div>
+</section>
 
-  <footer>
-    <p>© 2025 Charan Vijayakumar | Designed with ❤️ using HTML & CSS</p>
-  </footer>
+<section id="projects" class="container">
+  <h2>Projects</h2>
+  
+  <div class="project">
+    <h3>Legacy C Code Enhancement Tool</h3>
+    <p>Tool using Clang-Tidy to detect and annotate violations to improve legacy C code quality. (Mar 2025 - Jul 2025)</p>
+  </div>
+  
+  <div class="project">
+    <h3>E-Voting System with Blockchain</h3>
+    <p>Decentralized secure e-voting system built with Django and blockchain tech. (Mar 2023 - May 2023)</p>
+  </div>
+  
+  <div class="project">
+    <h3>Trailing Realtime Online System (TROS)</h3>
+    <p>Real-time privacy enhanced try-on app using React Native and Bootstrap. (Apr 2022 - Jun 2022)</p>
+  </div>
+  
+  <div class="project">
+    <h3>Basic Banking System App</h3>
+    <p>Mobile banking application developed with Android Studio and MySQL backend. (Oct 2021 - Nov 2021)</p>
+  </div>
+</section>
+
+<section id="contact" class="container">
+  <h2>Contact</h2>
+  <p>Email: <a href="mailto:vkcharan2001@gmail.com">vkcharan2001@gmail.com</a></p>
+</section>
+
 </body>
 </html>
-
