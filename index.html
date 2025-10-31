@@ -3,18 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Charan Vijayakumar Portfolio</title>
+  <title>Charan Vijayakumar | Portfolio</title>
   <style>
-    /* Reset & base */
-    * {
+    /* Global Reset */
+    *, *::before, *::after {
       box-sizing: border-box;
-      margin: 0; padding: 0;
-      scroll-behavior: smooth;
     }
     body {
+      margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #0a192f;
-      color: #ccd6f6;
+      background-color: #000;
+      color: #e0e0e0;
       line-height: 1.6;
     }
     a {
@@ -24,203 +23,294 @@
     a:hover {
       text-decoration: underline;
     }
-    /* Container */
     .container {
       max-width: 1000px;
+      padding: 1.5rem 1rem 3rem;
       margin: auto;
-      padding: 2rem 1rem;
     }
-    /* Navbar */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: #121212;
+      border-bottom: 1px solid #222;
+      z-index: 1000;
+      box-shadow: 0 2px 6px rgba(100,255,218,0.3);
+    }
     nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1rem 2rem;
-      position: fixed;
-      width: 100%;
-      background: #0a192f;
-      top: 0; left: 0;
-      z-index: 10;
-      border-bottom: 1px solid #112240;
+      max-width: 1000px;
+      margin: auto;
+      padding: 0.75rem 1rem;
     }
     nav .logo {
-      font-size: 1.5rem;
-      font-weight: bold;
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 1.4px;
       color: #64ffda;
     }
     nav ul {
       list-style: none;
       display: flex;
-      gap: 1rem;
-    }
-    nav ul li {
-      padding: 0.5rem 1rem;
+      gap: 1.5rem;
     }
     nav ul li a {
       font-weight: 600;
+      font-size: 1rem;
+      padding: 0.25rem 0;
+      position: relative;
     }
-    nav ul li a.active {
-      border-bottom: 2px solid #64ffda;
+    nav ul li a::after {
+      content: "";
+      display: block;
+      height: 2px;
+      width: 0%;
+      background: #64ffda;
+      transition: width 0.3s ease;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+    nav ul li a:hover::after,
+    nav ul li a.active::after {
+      width: 100%;
+    }
+    main {
+      padding-top: 5rem;
+      scroll-behavior: smooth;
+    }
+    section {
+      margin-bottom: 4rem;
+    }
+    h1, h2, h3 {
+      color: #64ffda;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 0.25rem;
+    }
+    h2 {
+      font-size: 2rem;
+      border-bottom: 3px solid #64ffda;
+      padding-bottom: 0.3rem;
+      max-width: max-content;
+    }
+    h3 {
+      font-size: 1.3rem;
+    }
+    p, li {
+      color: #cfd8dc;
+      font-size: 1.05rem;
     }
     /* Hero Section */
     #hero {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      height: 90vh;
       text-align: left;
-      padding-left: 2rem;
+      padding: 4rem 0 2rem;
     }
-    #hero h1 {
-      font-size: 3rem;
-      color: #64ffda;
-      margin-bottom: 0.5rem;
-    }
-    #hero p {
+    #hero .tagline {
       font-size: 1.3rem;
-      max-width: 600px;
-      color: #8892b0;
-    }
-    /* Sections */
-    section {
-      padding: 4rem 0;
-      border-bottom: 1px solid #112240;
-    }
-    section h2 {
-      font-size: 2rem;
-      color: #ccd6f6;
+      color: #a0b8bf;
       margin-bottom: 1rem;
-      border-bottom: 2px solid #64ffda;
-      display: inline-block;
-      padding-bottom: 0.3rem;
+      font-weight: 500;
     }
-    /* About */
-    #about p {
-      max-width: 700px;
-      color: #8892b0;
-      font-size: 1.1rem;
+    #hero a.button {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.7rem 1.5rem;
+      background-color: #64ffda;
+      color: #000;
+      font-weight: 700;
+      border-radius: 5px;
+      text-transform: uppercase;
+      letter-spacing: 1.25px;
+      transition: background-color 0.3s ease;
+    }
+    #hero a.button:hover {
+      background-color: #52d8c5;
     }
     /* Skills */
     .skills-list {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 0.6rem;
       margin-top: 1rem;
     }
     .skills-list span {
-      background: #112240;
+      background-color: #172a3a;
       padding: 0.5rem 1rem;
-      border-radius: 5px;
-      color: #64ffda;
+      border-radius: 20px;
       font-weight: 600;
-      font-size: 0.95rem;
+      color: #64ffda;
+      font-size: 1rem;
+      user-select:none;
+      box-shadow: inset 0 0 8px #64ffda44;
+      transition: background-color 0.3s ease;
+    }
+    .skills-list span:hover {
+      background-color: #64ffda;
+      color: #000;
+      cursor: default;
+      box-shadow: none;
+    }
+    /* Lists for education etc.*/
+    ul {
+      padding-left: 1.2rem;
+      margin-top: 0.5rem;
+    }
+    ul li {
+      margin-bottom: 0.5rem;
     }
     /* Projects */
     .project {
-      background: #112240;
+      background-color: #121212;
+      padding: 1rem 1.2rem;
+      border-radius: 10px;
       margin-bottom: 1.5rem;
-      padding: 1rem;
-      border-radius: 5px;
-      box-shadow: 0 0 5px #64ffda55;
-      transition: transform 0.3s ease;
+      box-shadow: 0 0 12px #64ffda44;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     .project:hover {
       transform: translateY(-5px);
-    }
-    .project h3 {
-      color: #64ffda;
-      margin-bottom: 0.5rem;
-    }
-    .project p {
-      color: #8892b0;
-      font-size: 1rem;
-      line-height: 1.3;
+      box-shadow: 0 10px 20px #64ffda80;
     }
     /* Contact */
-    #contact p {
-      max-width: 700px;
-      font-size: 1.1rem;
-      color: #8892b0;
+    #contact p a {
+      color: #64ffda;
+      font-weight: 600;
+    }
+    /* Footer */
+    footer {
+      color: #444;
+      font-size: 0.9rem;
+      text-align: center;
+      padding: 1rem 0;
+      border-top: 1px solid #222;
     }
     /* Responsive */
-    @media (max-width: 600px) {
-      #hero h1 {
+    @media (max-width: 768px) {
+      h1 {
         font-size: 2.2rem;
       }
       nav ul {
-        display: none; /* Simplify - no menu on small */
+        gap: 1rem;
+      }
+      .skills-list {
+        justify-content: center;
       }
       #hero {
-        padding-left: 1rem;
+        text-align: center;
       }
     }
   </style>
 </head>
 <body>
 
-<nav>
-  <div class="logo">Charan Vijayakumar</div>
-  <ul>
-    <li><a href="#hero" class="active">Home</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
+<header>
+  <nav>
+    <div class="logo">Charan Vijayakumar</div>
+    <ul>
+      <li><a href="#hero" class="active">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#certifications">Certifications</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
 
-<div id="hero" class="container">
-  <h1>Charan Vijayakumar</h1>
-  <p>Software Developer | Cybersecurity Enthusiast | Agile Practitioner</p>
-  <p><a href="resume.pdf" target="_blank" style="color:#64ffda;font-weight:700;">Download Resume</a></p>
-</div>
+<main class="container">
+  <section id="hero" aria-label="Introduction">
+    <h1>Charan Vijayakumar</h1>
+    <div class="tagline">Full Stack Developer | Cybersecurity Enthusiast | Agile Practitioner</div>
+    <a href="resume.pdf" class="button" target="_blank" rel="noopener">Download Resume</a>
+  </section>
 
-<section id="about" class="container">
-  <h2>About Me</h2>
-  <p>I am a motivated software development enthusiast with expertise in Agile methodology, Java, Apex, and API programming. Currently pursuing a Master's degree in Cybersecurity, I combine strong academic knowledge with hands-on project experience.</p>
-</section>
+  <section id="about" aria-label="About Me">
+    <h2>About Me</h2>
+    <p>I am a motivated software development enthusiast with a strong academic background in coding and entry-level experience, specializing in Agile methodology, Java, Apex, and API programming. Adept at developing CRM solutions tailored to client businesses and continuously identifying opportunities to enhance user experience. Currently pursuing a Master's in Cyber Security, I combine academic excellence with hands-on project development to deliver efficient and innovative software solutions.</p>
+  </section>
 
-<section id="skills" class="container">
-  <h2>Skills</h2>
-  <div class="skills-list">
-    <span>Java</span>
-    <span>Python</span>
-    <span>React.js</span>
-    <span>Django</span>
-    <span>HTML/CSS</span>
-    <span>Salesforce</span>
-    <span>Agile</span>
-  </div>
-</section>
+  <section id="skills" aria-label="Skills">
+    <h2>Skills</h2>
+    <div class="skills-list">
+      <span>Java</span>
+      <span>Python</span>
+      <span>React.js</span>
+      <span>Django</span>
+      <span>HTML5</span>
+      <span>CSS3</span>
+      <span>JavaScript</span>
+      <span>Bootstrap</span>
+      <span>React Native</span>
+      <span>Spring Boot</span>
+      <span>MySQL</span>
+      <span>Android Studio</span>
+      <span>Salesforce</span>
+      <span>Agile Methodology</span>
+      <span>API Programming</span>
+      <span>Problem Solving</span>
+      <span>Collaboration</span>
+      <span>Effective Communication</span>
+    </div>
+  </section>
 
-<section id="projects" class="container">
-  <h2>Projects</h2>
-  
-  <div class="project">
-    <h3>Legacy C Code Enhancement Tool</h3>
-    <p>Tool using Clang-Tidy to detect and annotate violations to improve legacy C code quality. (Mar 2025 - Jul 2025)</p>
-  </div>
-  
-  <div class="project">
-    <h3>E-Voting System with Blockchain</h3>
-    <p>Decentralized secure e-voting system built with Django and blockchain tech. (Mar 2023 - May 2023)</p>
-  </div>
-  
-  <div class="project">
-    <h3>Trailing Realtime Online System (TROS)</h3>
-    <p>Real-time privacy enhanced try-on app using React Native and Bootstrap. (Apr 2022 - Jun 2022)</p>
-  </div>
-  
-  <div class="project">
-    <h3>Basic Banking System App</h3>
-    <p>Mobile banking application developed with Android Studio and MySQL backend. (Oct 2021 - Nov 2021)</p>
-  </div>
-</section>
+  <section id="projects" aria-label="Projects">
+    <h2>Projects</h2>
 
-<section id="contact" class="container">
-  <h2>Contact</h2>
-  <p>Email: <a href="mailto:vkcharan2001@gmail.com">vkcharan2001@gmail.com</a></p>
-</section>
+    <article class="project" aria-label="Legacy C Code Enhancement Tool project">
+      <h3>Enhancing Legacy Code with C Core Guidelines</h3>
+      <p>Developed a tool using Clang-Tidy to detect and annotate violations to improve legacy C code quality. The tool supports generating annotated and guideline-compliant versions of source files and has been tested on real-world open-source projects. (Mar 2025 - Jul 2025)</p>
+    </article>
+
+    <article class="project" aria-label="E-Voting System using Blockchain project">
+      <h3>E-Voting System using Blockchain</h3>
+      <p>Created a decentralized, secure e-voting platform using Django and Blockchain that enhances the integrity and accessibility of elections. (Mar 2023 - May 2023)</p>
+    </article>
+
+    <article class="project" aria-label="Trailing Realtime Online System project">
+      <h3>Trailing Realtime Online System (TROS)</h3>
+      <p>Built a privacy-enhanced real-time try-on app using React Native and Bootstrap to facilitate secure online shopping. (Apr 2022 - Jun 2022)</p>
+    </article>
+
+    <article class="project" aria-label="Basic Banking System project">
+      <h3>Basic Banking System</h3>
+      <p>Developed a mobile banking application with Android Studio and a MySQL backend supporting basic banking operations. (Oct 2021 - Nov 2021)</p>
+    </article>
+  </section>
+
+  <section id="education" aria-label="Education">
+    <h2>Education</h2>
+    <ul>
+      <li><strong>Master of Engineering in Cyber Security</strong>, University of Limerick, Ireland (2024–2025)</li>
+      <li><strong>Bachelor of Technology in Information Technology</strong>, Loyola-ICAM College of Engineering and Technology, Chennai (2020–2023) - CGPA: 7.9</li>
+      <li><strong>Diploma in Computer Science Engineering</strong>, Panimalar Polytechnic College, Chennai (2017–2020) - CGPA: 8.0</li>
+    </ul>
+  </section>
+
+  <section id="certifications" aria-label="Certifications">
+    <h2>Certifications</h2>
+    <ul>
+      <li>Java Full Stack Web Development, Credo Systemz (Aug 2023 – Jan 2024)</li>
+    </ul>
+  </section>
+
+  <section id="contact" aria-label="Contact">
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:Vkcharan2001@gmail.com">Vkcharan2001@gmail.com</a></p>
+    <p>GitHub: <a href="https://github.com/charan-vijayakumar-87a382199" target="_blank" rel="noopener">charan-vijayakumar-87a382199</a></p>
+    <!-- Add your LinkedIn or portfolio URL here if available -->
+  </section>
+</main>
+
+<footer>
+  <p>&copy; 2025 Charan Vijayakumar. All rights reserved.</p>
+</footer>
 
 </body>
 </html>
