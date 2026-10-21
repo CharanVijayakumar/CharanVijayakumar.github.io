@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Charan's Interactive Project Lab</title>
+<style>
+:root{font-family:Inter,system-ui,Segoe UI,sans-serif;color:#e5edf7;background:#09111f}*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(circle at 20% 0,#17375c 0,transparent 38%),#09111f}
+header{padding:36px max(24px,calc((100vw - 1120px)/2));border-bottom:1px solid #293c54}h1{font-size:clamp(2rem,4vw,3rem);margin:8px 0}p{color:#b7c8dc;line-height:1.6}.eyebrow{color:#72e0cb;text-transform:uppercase;letter-spacing:.14em;font-size:.8rem;font-weight:700}
+main{max-width:1120px;margin:auto;padding:24px}nav{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:22px}button,select,input{font:inherit}button{border:1px solid #47617f;background:#182a43;color:#f3f7ff;padding:11px 15px;border-radius:10px;cursor:pointer}button:hover,button:focus-visible{background:#25456c;outline:2px solid #73d6ee}button.active,.primary{background:#087c82;border-color:#4ce1d3;color:white}button:disabled{opacity:.5}input,select{background:#0d1b2c;border:1px solid #48617b;color:white;border-radius:8px;padding:10px;width:100%;margin:5px 0 13px}label{font-weight:600;font-size:.9rem}.grid{display:grid;grid-template-columns:minmax(250px,380px) 1fr;gap:20px}.panel{background:#111e31;border:1px solid #2d435e;border-radius:16px;padding:22px;min-width:0}.panel h2{margin-top:0}.metric{display:inline-block;background:#20344d;padding:10px 14px;border-radius:10px;margin:6px 6px 6px 0}.metric strong{color:#6be4ce}pre{white-space:pre-wrap;word-break:break-word;background:#071321;border:1px solid #30445e;border-radius:10px;padding:16px;color:#cde2f7;min-height:110px;line-height:1.5}.steps{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0}.step{background:#223b55;padding:12px;border-radius:10px;border:1px solid #43617e}.arrow{align-self:center;color:#72e0cb}.note{font-size:.88rem;color:#9cb3ce}.visual{display:grid;place-items:center;min-height:180px;background:#0c192b;border:1px dashed #47617b;border-radius:12px;margin-top:16px;padding:20px}.shirt{height:115px;width:130px;clip-path:polygon(24% 0,76% 0,100% 26%,83% 45%,83% 100%,17% 100%,17% 45%,0 26%);background:#2563eb}.ledger{display:flex;flex-wrap:wrap;gap:10px}.block{background:#1c3853;border:1px solid #61a8bc;border-radius:9px;padding:13px;max-width:175px;overflow-wrap:anywhere}.muted{color:#a6bcd3}a{color:#7fe5d6}footer{max-width:1120px;margin:auto;padding:25px;color:#9eb4cd}@media(max-width:750px){.grid{grid-template-columns:1fr}header{padding:25px}main{padding:14px}}
+</style></head><body><header><div class="eyebrow">Interactive learning studio · browser demos</div><h1>Explore my software projects</h1><p>Change inputs, run a simulation, and understand each project's workflow. Every demonstration runs locally in your browser.</p><a href="../">← Back to portfolio</a></header>
+<main><nav id="tabs" aria-label="Choose project"></nav><section class="grid"><div class="panel"><h2 id="project-title"></h2><p id="intro"></p><div id="controls"></div><p class="note" id="limitations"></p></div><div class="panel"><h2>Live demonstration</h2><div class="steps" id="pipeline"></div><div id="metrics"></div><div class="visual" id="visual"></div><h3>Output / explanation</h3><pre id="output" aria-live="polite">Choose inputs and press Run.</pre><div id="links"></div></div></section></main><footer>Educational simulations, not live back-end services. Reconstructed projects are clearly distinguished from recovered original code. No inputs are sent to a server.</footer>
+<script>
+'use strict';
+const root='https://github.com/CharanVijayakumar/';
+const projects=[
+{id:'cpp',title:'C++ Modernizer',intro:'See how legacy code is detected, annotated, and selectively modernized.',stages:['C++ input','Static analysis','Annotation','Safe fix','Review'],limits:'Simulation only. Real clang-tidy checks and build validation must be run separately.',repo:'cpp-core-guidelines-modernizer'},
+{id:'vote',title:'E-Voting Ledger',intro:'Cast demonstration ballots and inspect a hash-linked ledger.',stages:['Voter input','Validation','Block creation','Linked ledger','Tally'],limits:'Educational hash-chain model, not anonymous voting or decentralized consensus.',repo:'blockchain-evoting-system'},
+{id:'bank',title:'Banking System',intro:'Experiment with account deposits, withdrawals, and transfers.',stages:['Request','Validate','Check balance','Update ledger','Result'],limits:'In-memory demo using integer cents. No real money or accounts.',repo:'basic-banking-system'},
+{id:'tasks',title:'Java Task Manager',intro:'Create and complete tasks, and view the equivalent HTTP request.',stages:['HTTP request','Validate','Task store','JSON response'],limits:'Browser simulation of the Java HTTP API, not a live Java server.',repo:'java-task-manager-api'},
+{id:'tros',title:'TROS Try-On',intro:'Choose garment colours to preview a simplified virtual outfit.',stages:['Select colour','Render garment','Preview'],limits:'Stylized garment preview; not real augmented reality or body measurements.',repo:'tros-virtual-tryon-demo'}
+];
+const state={vote:[],bank:{checking:10000,savings:2500},tasks:[],nextTask:1,cppRuns:0};
+const el=id=>document.getElementById(id);
+const escapeHTML=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const field=(id,label,type='text',value='')=>'<label for="'+id+'">'+label+'</label><input id="'+id+'" type="'+type+'" value="'+escapeHTML(value)+'">';
+const select=(id,label,opts)=>'<label for="'+id+'">'+label+'</label><select id="'+id+'">'+opts.map(o=>'<option>'+escapeHTML(o)+'</option>').join('')+'</select>';
+const output=(s)=>el('output').textContent=s;
+const metric=(s)=>'<span class="metric">'+s+'</span>';
+function view(id){
+ const p=projects.find(x=>x.id===id);if(!p)return;
+ el('tabs').innerHTML=projects.map(x=>'<button type="button" data-tab="'+x.id+'" class="'+(x.id===id?'active':'')+'" aria-pressed="'+(x.id===id)+'">'+x.title+'</button>').join('');
+ el('project-title').textContent=p.title;el('intro').textContent=p.intro;el('limitations').textContent=p.limits;
+ el('pipeline').innerHTML=p.stages.map((x,i)=>'<span class="step">'+escapeHTML(x)+'</span>'+(i<p.stages.length-1?'<span class="arrow">→</span>':'')).join('');
+ el('links').innerHTML='<p><a href="'+root+p.repo+'" target="_blank" rel="noopener">Explore source code and README ↗</a></p>';
+ el('metrics').innerHTML='';el('visual').innerHTML='<span class="muted">Run the demonstration to visualize results.</span>';
+ const controls={
+ cpp:select('rule','Legacy pattern',['NULL → nullptr','typedef → using','C-style cast (manual review)'])+'<button class="primary" id="run">Analyze example</button>',
+ vote:field('voter','Demo voter ID','text','voter-001')+select('candidate','Candidate',['Alice','Bob','Charlie'])+'<button class="primary" id="run">Cast demo vote</button> <button id="reset">Reset ledger</button>',
+ bank:select('action','Transaction',['Deposit','Withdraw','Transfer'])+select('from','Account',['checking','savings'])+field('amount','Amount (€)','number','25')+'<button class="primary" id="run">Run transaction</button> <button id="reset">Reset balances</button>',
+ tasks:field('task','Task title','text','Review C++ annotations')+'<button class="primary" id="run">Create task</button> <button id="reset">Clear tasks</button><div id="task-list"></div>',
+ tros:select('colour','Garment colour',['Blue','Red','Green','Black'])+'<button class="primary" id="run">Preview garment</button>'
+ };
+ el('controls').innerHTML=controls[id];output('Choose inputs and press Run.');
+ el('run').addEventListener('click',()=>run(id));
+ if(el('reset'))el('reset').addEventListener('click',()=>reset(id));
+ if(id==='tasks')drawTasks();
+}
+function run(id){
+ if(id==='cpp'){
+  const choice=el('rule').value;
+  const data={
+  'NULL → nullptr':['int* ptr = NULL;','int* ptr = nullptr;','modernize-use-nullptr: Prefer nullptr over NULL.','Automatic replacement illustrated.'],
+  'typedef → using':['typedef unsigned int Count;','using Count = unsigned int;','modernize-use-using: Prefer type aliases.','Automatic replacement illustrated.'],
+  'C-style cast (manual review)':['int result = (int)value;','int result = (int)value;','google-readability-casting: Review the C-style cast.','No automatic change: the appropriate cast needs semantic review.']
+  }[choice];
+  state.cppRuns++;el('metrics').innerHTML=metric('Analysis runs: <strong>'+state.cppRuns+'</strong>');
+  el('visual').innerHTML='<div style="width:100%"><h3>Before</h3><pre>'+escapeHTML(data[0])+'</pre><h3>After</h3><pre>'+escapeHTML(data[1])+'</pre></div>';
+  output('Detected: '+data[2]+'\n\n'+data[3]+'\n\nReal project: clang-tidy diagnostics → annotated copy → corrected copy → compile/test review.');
+ }else if(id==='vote'){
+  const voter=el('voter').value.trim(),candidate=el('candidate').value;
+  if(!voter){output('Enter a demo voter ID.');return}
+  if(state.vote.some(x=>x.voter===voter)){output('Rejected: this voter ID has already cast a ballot.');return}
+  const previous=state.vote.length?state.vote[state.vote.length-1].hash:'GENESIS';
+  const hash=simpleHash(previous+'|'+voter+'|'+candidate);
+  state.vote.push({voter,candidate,previous,hash});
+  el('metrics').innerHTML=metric('Ballots: <strong>'+state.vote.length+'</strong>');
+  el('visual').innerHTML='<div class="ledger">'+state.vote.map((b,i)=>'<div class="block">Block '+(i+1)+'<br>'+escapeHTML(b.candidate)+'<br><small>Prev: '+escapeHTML(b.previous)+'</small><br><small>Hash: '+b.hash+'</small></div>').join('<span class="arrow">→</span>')+'</div>';
+  const tally={};state.vote.forEach(b=>tally[b.candidate]=(tally[b.candidate]||0)+1);
+  output('Ballot accepted for demo voter '+voter+'.\nCurrent tally: '+JSON.stringify(tally,null,2)+'\n\nHashes shown use a simple illustrative function, NOT cryptographic SHA-256.');
+ }else if(id==='bank'){
+  const amount=Math.round(Number(el('amount').value)*100),from=el('from').value,action=el('action').value;
+  if(!Number.isSafeInteger(amount)||amount<=0){output('Enter a valid positive amount.');return}
+  if(action==='Deposit'){state.bank[from]+=amount}
+  else if(action==='Withdraw'){if(state.bank[from]<amount){output('Rejected: insufficient funds.');return}state.bank[from]-=amount}
+  else{const to=from==='checking'?'savings':'checking';if(state.bank[from]<amount){output('Rejected: insufficient funds.');return}state.bank[from]-=amount;state.bank[to]+=amount}
+  const euro=x=>'€'+(x/100).toFixed(2);
+  el('metrics').innerHTML=metric('Checking: <strong>'+euro(state.bank.checking)+'</strong>')+metric('Savings: <strong>'+euro(state.bank.savings)+'</strong>');
+  el('visual').innerHTML='<div class="ledger"><div class="block">Checking<br><strong>'+euro(state.bank.checking)+'</strong></div><div class="block">Savings<br><strong>'+euro(state.bank.savings)+'</strong></div></div>';
+  output(action+' of '+euro(amount)+' processed for '+from+'.\nAll balances are simulated locally in the browser.');
+ }else if(id==='tasks'){
+  const title=el('task').value.trim();if(!title||title.length>200){output('Enter a task title (1–200 characters).');return}
+  const task={id:state.nextTask++,title,done:false};state.tasks.push(task);drawTasks();
+  output('POST /tasks?title='+encodeURIComponent(title)+'\n\nHTTP 201 Created\n'+JSON.stringify({id:task.id,title,complete:false},null,2));
+ }else if(id==='tros'){
+  const colors={Blue:'#2563eb',Red:'#dc2626',Green:'#16a34a',Black:'#111827'},colour=el('colour').value;
+  el('visual').innerHTML='<div style="text-align:center"><div style="font-size:48px">🙂</div><div class="shirt" style="background:'+colors[colour]+'"></div><p>'+colour+' garment preview</p></div>';
+  output('Selected '+colour+'.\nThe browser updates the garment illustration instantly. No image upload or camera is involved.');
+ }
+}
+function simpleHash(str){let h=2166136261;for(const c of str){h=Math.imul(h^c.charCodeAt(0),16777619)}return (h>>>0).toString(16).padStart(8,'0')}
+function drawTasks(){
+ if(!el('task-list'))return;
+ el('task-list').innerHTML='<h3>Task list</h3>'+(state.tasks.length?state.tasks.map(t=>'<p><button type="button" data-complete="'+t.id+'" '+(t.done?'disabled':'')+'>'+(t.done?'✓':'Complete')+'</button> '+escapeHTML(t.title)+'</p>').join(''):'<p class="note">No tasks yet.</p>');
+ el('metrics').innerHTML=metric('Tasks: <strong>'+state.tasks.length+'</strong>')+metric('Completed: <strong>'+state.tasks.filter(x=>x.done).length+'</strong>');
+ el('visual').innerHTML='<div style="width:100%"><pre>'+escapeHTML(JSON.stringify(state.tasks,null,2))+'</pre></div>';
+}
+function reset(id){if(id==='vote'){state.vote=[];view(id)}else if(id==='bank'){state.bank={checking:10000,savings:2500};view(id)}else if(id==='tasks'){state.tasks=[];state.nextTask=1;view(id)}}
+document.addEventListener('click',e=>{
+ const tab=e.target.closest('[data-tab]');if(tab){view(tab.dataset.tab);return}
+ const done=e.target.closest('[data-complete]');if(done){const task=state.tasks.find(t=>t.id===Number(done.dataset.complete));if(task){task.done=true;drawTasks();output('POST /tasks/'+task.id+'/complete\n\nHTTP 200 OK\n'+JSON.stringify({id:task.id,title:task.title,complete:true},null,2))}}
+});
+view('cpp');
+</script></body></html>
